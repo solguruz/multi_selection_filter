@@ -3,7 +3,7 @@
 
 A package that will help you to create multi selection filter dialog in Flutter.
 
-![Multi_selection_filter package poster](https://github.com/solguruz/multi_selection_filter/assets/116786961/4c37b351-b632-40c7-970b-1cc9f609f5e2 "Multi_selection_filter")
+![Multi_selection_filter package poster](https://github.com/solguruz/multi_selection_filter/assets/116786961/62935b48-715c-4eb3-936f-53f5843ef745 "Multi_selection_filter")
 
 ##  Features
 
@@ -16,7 +16,7 @@ A package that will help you to create multi selection filter dialog in Flutter.
 
 ```yaml
 # add this line to your dependencies
-multi_selection_filter: ^0.0.2
+multi_selection_filter: ^0.0.3
 ```
 
 ```dart

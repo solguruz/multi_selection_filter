@@ -1,6 +1,6 @@
 name: multi_selection_filter
 description: A package that will help you to create multi selection filter dialog in Flutter.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/solguruz/multi_selection_filter
 
 environment:
