@@ -3,9 +3,9 @@
 
 A package that will help you to create multi selection filter dialog in Flutter.
 
-##  Features
+![Multi_selection_filter package poster](assets/images/poster.png?raw=true "Multi_selection_filter")
 
-<PACKAGE_IMAGES>
+##  Features
 
 - Flutter 3.10 compatible
 - Checkbox list for selection
