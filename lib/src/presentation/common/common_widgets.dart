@@ -91,11 +91,11 @@ Widget customMaterialButton({
 
 Widget buildRoundCloseButton(
     {required Color iconColor,
-    required Color iconBackgroudColor,
+    required Color iconBackgroundColor,
     required Function onCloseButtonTap}) {
   return Container(
     decoration:
-        BoxDecoration(color: iconBackgroudColor, shape: BoxShape.circle),
+        BoxDecoration(color: iconBackgroundColor, shape: BoxShape.circle),
     child: Material(
       color: Colors.transparent,
       child: InkWell(
