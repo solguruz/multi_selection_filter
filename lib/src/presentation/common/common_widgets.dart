@@ -4,12 +4,14 @@ import '../../models/item_model.dart';
 import '../../utils/size_util.dart';
 import '../../style/app_text_style.dart';
 
+/// Creates a horizontal dynamic blank space
 Widget horizontalSpace(BuildContext context, double horizontalSpace) {
   return SizedBox(
     width: MediaQuery.of(context).size.shortestSide * horizontalSpace,
   );
 }
 
+/// Creates a vertical dynamic blank space
 Widget verticalSpace(BuildContext context, double verticalSpace) {
   return SizedBox(
     height: MediaQuery.of(context).size.longestSide * verticalSpace,
