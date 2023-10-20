@@ -35,7 +35,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     foodItems.putIfAbsent("Aloo Gobi", () => false);
+    foodItems.putIfAbsent("Tacos", () => false);
+    foodItems.putIfAbsent("Falafel", () => false);
     foodItems.putIfAbsent("Margherita Pizza", () => false);
+    foodItems.putIfAbsent("Dal Makhani", () => false);
     foodItems.putIfAbsent("Hot and Sour Soup", () => false);
     foodItems.putIfAbsent("Bruschetta", () => false);
     foodItems.putIfAbsent("Mapo Tofu", () => false);
