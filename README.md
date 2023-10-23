@@ -13,7 +13,13 @@
  -   Option to display removable chips for added user convenience
 
 </br>
- <img width="447" alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/assets/116786961/37aca9f0-ff6c-4f05-b033-759eda7a0733"> <img width="447" alt="Design" src="https://github.com/solguruz/multi_selection_filter/assets/116786961/1d9d0dc8-bf73-4712-afad-0ae98b6b6be3">
+<p align="center">
+<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/assets/116786961/37aca9f0-ff6c-4f05-b033-759eda7a0733" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/assets/116786961/1d9d0dc8-bf73-4712-afad-0ae98b6b6be3"  width="45%">
+</p>
+
+  
 
 ## Installation
 
