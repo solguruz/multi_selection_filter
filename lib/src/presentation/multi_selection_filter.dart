@@ -6,6 +6,10 @@ import '../style/app_text_style.dart';
 import '../utils/size_util.dart';
 import 'common/common_widgets.dart';
 
+/// Multi Selection Filter is a very handy tool to showing multiple items
+/// inside a dialog box. Users can select or unselect this items for a
+/// specific purpose. This dialog box is also a fully customizable.
+
 class MultiSelectionFilter extends StatefulWidget {
   const MultiSelectionFilter({
     super.key,
@@ -29,6 +33,10 @@ class MultiSelectionFilter extends StatefulWidget {
     this.doneButtonText = AppConstants.done,
     this.searchHint = AppConstants.searchHint,
   });
+
+  ///  Need to pass list of bool and text. For each items,
+  /// it will show weather it is checked or not.
+  /// And sam will be updated when filter applied.
   final List<String> textListToShow;
   final List<bool?> selectedList;
   final String title;
@@ -46,6 +54,8 @@ class MultiSelectionFilter extends StatefulWidget {
       checkboxTitleTextColor,
       doneButtonBG,
       doneButtonTextColor;
+
+  /// Get callback when filter applied
   final Function(
     String,
     int,
@@ -60,11 +70,16 @@ class MultiSelectionFilter extends StatefulWidget {
 class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
   @override
   Widget build(BuildContext context) {
+    /// check if item list length and checkbox length are equal,
+    /// otherwise error will be thrown
     return GestureDetector(
       onTap: () => widget.selectedList.length != widget.textListToShow.length
-          ? ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content:
-                  Text('Item selected list must be same length as Title list')))
+          ? ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                    'Item selected list must be same length as Title list'),
+              ),
+            )
           : buildMultiSelectionDialog(),
       child: widget.child,
     );
@@ -83,6 +98,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
       }
     }
 
+    /// Perform a search on dialog list
     void createListSearchedValue(String value) {
       searchedItemModels = [];
       for (var i = 0; i < widget.textListToShow.length; i++) {
@@ -94,12 +110,15 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
       }
     }
 
+    /// Updates list when item is selected or unselected
+    /// and also sends a callback for the same
     void onItemSelected(int id, bool isSelected) {
       int index = itemModels.indexWhere((model) => model.id == id);
       itemModels[index].isSelected = !itemModels[index].isSelected;
       widget.onCheckboxTap(itemModels[index].itemName, index, isSelected);
     }
 
+    /// Showing main dialog
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -131,7 +150,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
                 const Spacer(),
                 buildRoundCloseButton(
                   iconColor: widget.closeIconColor,
-                  iconBackgroudColor: widget.closeIconBG,
+                  iconBackgroundColor: widget.closeIconBG,
                   onCloseButtonTap: () {
                     Navigator.of(context).pop();
                   },
@@ -149,94 +168,30 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
                   ),
                   child: Column(
                     children: [
-                      TextField(
-                        controller: searchTextController,
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.search,
-                        cursorColor: widget.accentColor,
-                        style: bodyLargeTextStyle(context),
-                        maxLength: TextField.noMaxLength,
-                        decoration: InputDecoration(
-                          counterText: '',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none),
-                          filled: true,
-                          hintText: widget.searchHint,
-                        ),
-                        onChanged: (v) => onSearched(v),
-                      ),
+                      /// Shows a Search box on top of dialog
+                      buildDialogTopSearch(
+                          searchTextController, context, onSearched),
                       verticalSpace(context, 0.02),
-                      Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: showingFromSearch
-                              ? searchedItemModels.length
-                              : itemModels.length,
-                          itemBuilder: (context, index) {
-                            ItemModel itemModel = showingFromSearch
-                                ? searchedItemModels[index]
-                                : itemModels[index];
-                            return buildCheckboxWithTitle(
-                                context: context,
-                                title: itemModel.itemName,
-                                checkboxValue: itemModel.isSelected,
-                                backgroundColor: widget.checkboxTitleBG,
-                                shadowColor:
-                                    widget.checkboxTitleBG.withOpacity(0.1),
-                                checkboxActiveColor: widget.accentColor,
-                                checkboxCheckColor: widget.checkboxCheckColor,
-                                textColor: widget.checkboxTitleTextColor,
-                                onCheckboxChanged: (isSelected) {
-                                  setState(
-                                    () => onItemSelected(
-                                        itemModel.id, isSelected),
-                                  );
-                                },
-                                onTap: () {
-                                  setState(
-                                    () => onItemSelected(
-                                        itemModel.id, !itemModel.isSelected),
-                                  );
-                                });
-                          },
-                        ),
-                      ),
+
+                      /// Main list of items with Text and Checkbox
+                      buildDialogList(showingFromSearch, searchedItemModels,
+                          itemModels, setState, onItemSelected),
                       verticalSpace(context, 0.02),
+
+                      /// Shows a chips UI at the bottom
+                      /// Will help to easily find which item are checked
+                      /// Although it can be hide by making `showChips` to false
                       if (SizeUtil.bottom == 0 && widget.showChips)
-                        Container(
-                          height: MediaQuery.of(context).size.longestSide * 0.2,
-                          alignment: Alignment.center,
-                          child: itemModels.isNotEmpty
-                              ? SingleChildScrollView(
-                                  child: buildSelectedListChip(
-                                    context: context,
-                                    chipBackgroundColor: widget.checkboxTitleBG,
-                                    closeIconColor: widget.accentColor,
-                                    textColor: widget.checkboxTitleTextColor,
-                                    checkedListForChip: itemModels
-                                        .where((element) => element.isSelected)
-                                        .toList(),
-                                    onChipDeleted: (selectedModel) {
-                                      setState(
-                                        () {
-                                          onItemSelected(
-                                              selectedModel.id,
-                                              !itemModels[selectedModel.id]
-                                                  .isSelected);
-                                        },
-                                      );
-                                    },
-                                  ),
-                                )
-                              : const SizedBox.shrink(),
-                        ),
+                        buildDialogChips(
+                            context, itemModels, setState, onItemSelected),
                       verticalSpace(
                           context,
                           MediaQuery.of(context).viewInsets.bottom == 0
                               ? 0.02
                               : 0),
                       if (MediaQuery.of(context).viewInsets.bottom == 0)
+
+                        /// Creates an Apply filter button
                         customMaterialButton(
                           context: context,
                           backgroundColor: widget.doneButtonBG,
@@ -253,6 +208,96 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
           );
         });
       },
+    );
+  }
+
+  TextField buildDialogTopSearch(TextEditingController searchTextController,
+      BuildContext context, void Function(String value) onSearched) {
+    return TextField(
+      controller: searchTextController,
+      keyboardType: TextInputType.text,
+      textInputAction: TextInputAction.search,
+      cursorColor: widget.accentColor,
+      style: bodyLargeTextStyle(context),
+      maxLength: TextField.noMaxLength,
+      decoration: InputDecoration(
+        counterText: '',
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none),
+        filled: true,
+        hintText: widget.searchHint,
+      ),
+      onChanged: (v) => onSearched(v),
+    );
+  }
+
+  Widget buildDialogList(
+      bool showingFromSearch,
+      List<ItemModel> searchedItemModels,
+      List<ItemModel> itemModels,
+      StateSetter setState,
+      void Function(int id, bool isSelected) onItemSelected) {
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount:
+            showingFromSearch ? searchedItemModels.length : itemModels.length,
+        itemBuilder: (context, index) {
+          ItemModel itemModel =
+              showingFromSearch ? searchedItemModels[index] : itemModels[index];
+          return buildCheckboxWithTitle(
+              context: context,
+              title: itemModel.itemName,
+              checkboxValue: itemModel.isSelected,
+              backgroundColor: widget.checkboxTitleBG,
+              shadowColor: widget.checkboxTitleBG.withOpacity(0.1),
+              checkboxActiveColor: widget.accentColor,
+              checkboxCheckColor: widget.checkboxCheckColor,
+              textColor: widget.checkboxTitleTextColor,
+              onCheckboxChanged: (isSelected) {
+                setState(
+                  () => onItemSelected(itemModel.id, isSelected),
+                );
+              },
+              onTap: () {
+                setState(
+                  () => onItemSelected(itemModel.id, !itemModel.isSelected),
+                );
+              });
+        },
+      ),
+    );
+  }
+
+  Widget buildDialogChips(
+      BuildContext context,
+      List<ItemModel> itemModels,
+      StateSetter setState,
+      void Function(int id, bool isSelected) onItemSelected) {
+    return Container(
+      height: MediaQuery.of(context).size.longestSide * 0.2,
+      alignment: Alignment.center,
+      child: itemModels.isNotEmpty
+          ? SingleChildScrollView(
+              child: buildSelectedListChip(
+                context: context,
+                chipBackgroundColor: widget.checkboxTitleBG,
+                closeIconColor: widget.accentColor,
+                textColor: widget.checkboxTitleTextColor,
+                checkedListForChip:
+                    itemModels.where((element) => element.isSelected).toList(),
+                onChipDeleted: (selectedModel) {
+                  setState(
+                    () {
+                      onItemSelected(selectedModel.id,
+                          !itemModels[selectedModel.id].isSelected);
+                    },
+                  );
+                },
+              ),
+            )
+          : const SizedBox.shrink(),
     );
   }
 }

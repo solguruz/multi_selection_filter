@@ -1,11 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:multi_selection_filter/multi_selection_filter.dart';
-
-import 'constants/app_constants.dart';
-import 'helper/helper.dart';
-import 'models/food_item_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: AppConstants.appName,
+      title: "My Favorite Foods",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(),
@@ -35,21 +30,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<FoodItemModel> foodItems = [];
+  Map<String, bool> foodItems = {};
 
   @override
   void initState() {
-    initFoodItems();
+    foodItems.putIfAbsent("Aloo Gobi", () => false);
+    foodItems.putIfAbsent("Tacos", () => false);
+    foodItems.putIfAbsent("Falafel", () => false);
+    foodItems.putIfAbsent("Margherita Pizza", () => false);
+    foodItems.putIfAbsent("Dal Makhani", () => false);
+    foodItems.putIfAbsent("Hot and Sour Soup", () => false);
+    foodItems.putIfAbsent("Bruschetta", () => false);
+    foodItems.putIfAbsent("Mapo Tofu", () => false);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<FoodItemModel> selectedFoodItems =
-        foodItems.where((foodItem) => foodItem.isSelected).toList();
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppConstants.appName),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("Multi Selection Filter"),
       ),
       body: Column(
         children: [
@@ -57,8 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
           _buildFilterWidget(),
           const SizedBox(height: 20),
           Expanded(
-            child: selectedFoodItems.isNotEmpty
-                ? _buildSelectedFoodChip(selectedFoodItems)
+            child: foodItems.values.contains(true)
+                ? _buildSelectedFoodChip()
                 : _buildNoFoodSelected(context),
           ),
         ],
@@ -70,30 +72,29 @@ class _MyHomePageState extends State<MyHomePage> {
     return Align(
       alignment: Alignment.topCenter,
       child: MultiSelectionFilter(
-        title: AppConstants.titleSelectFood,
-        textListToShow: foodItems.map((foodItem) => foodItem.foodName).toList(),
-        selectedList: foodItems.map((foodItem) => foodItem.isSelected).toList(),
-        okButtonText: AppConstants.ok,
-        accentColor: randomColors[4],
+        title: "Select Food",
+        textListToShow: foodItems.keys.toList(),
+        selectedList: foodItems.values.toList(),
+        okButtonText: "Ok",
+        accentColor: const Color(0xFF01b4e4),
         checkboxTitleBG: Colors.black87,
         checkboxCheckColor: Colors.white,
         checkboxTitleTextColor: Colors.white,
-        doneButtonBG: randomColors[4],
+        doneButtonBG: const Color(0xFF01b4e4),
         doneButtonTextColor: Colors.white,
-        onOkPress: () {
-          Navigator.pop(context);
-        },
-        onCheckboxTap: (name, index, isChecked) {
+        onOkPress: () => Navigator.pop(context),
+        onCheckboxTap: (key, index, isChecked) {
           setState(() {
-            foodItems[index].isSelected = isChecked;
+            foodItems[key] = isChecked;
           });
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
             shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8))),
-            color: randomColors[6],
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+            color: Colors.blueGrey.shade700,
             elevation: 4,
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -101,12 +102,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(AppConstants.filterFoodItems),
+                  Text(
+                    "Filter Food items",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w600),
+                  ),
                   SizedBox(width: 16),
                   Icon(
                     Icons.fastfood_rounded,
                     size: 30,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ],
               ),
@@ -117,73 +122,44 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildSelectedFoodChip(List<FoodItemModel> selectedFoodItems) {
-    return SingleChildScrollView(
-      child: Wrap(
-        spacing: 12,
-        children: List<Widget>.generate(selectedFoodItems.length, (int index) {
-          return Chip(
-            onDeleted: () => setState(() {
-              selectedFoodItems[index].isSelected = false;
-            }),
-            labelPadding: const EdgeInsets.only(right: 5),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: selectedFoodItems[index].labelColor,
-              ),
-              borderRadius: BorderRadius.circular(5.0),
-            ),
-            label: Text(
-              selectedFoodItems[index].foodName,
+  Widget _buildSelectedFoodChip() {
+    var selectedFoodItems = foodItems.entries.where((element) => element.value);
+    return ListView.builder(
+      itemCount: selectedFoodItems.length,
+      itemBuilder: (context, index) {
+        return Chip(
+          onDeleted: () => setState(() {
+            foodItems[selectedFoodItems.toList()[index].key] = false;
+          }),
+          backgroundColor: const Color(0xFFFDCB47),
+          labelPadding: const EdgeInsets.only(right: 5),
+          label: SizedBox(
+            width: MediaQuery.of(context).size.width / 2,
+            child: Text(
+              selectedFoodItems.toList()[index].key,
               style: const TextStyle(
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
-            deleteIcon: const Icon(
-              Icons.close,
-              size: 20,
-              color: Colors.white,
-            ),
-            backgroundColor: selectedFoodItems[index].labelColor,
-          );
-        }).toList(),
-      ),
+          ),
+          deleteIcon: const Icon(
+            Icons.close,
+            size: 20,
+            color: Colors.black,
+          ),
+        );
+      },
     );
   }
 
   Widget _buildNoFoodSelected(BuildContext context) {
     return Center(
         child: Text(
-      AppConstants.selectFoodItem,
+      "Please select Food item",
       style: Theme.of(context)
           .textTheme
           .headlineSmall!
           .copyWith(color: Colors.black54),
     ));
-  }
-
-  void initFoodItems() {
-    foodItems.add(FoodItemModel('Aloo Gobi', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Vada Pav', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Margherita Pizza', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Palak Paneer', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Bruschetta', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Mapo Tofu', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Chow Mein', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Sweet Potato Fries', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('French Fried', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Hot and Sour Soup', false,
-        randomColors[Random().nextInt(randomColors.length)]));
-    foodItems.add(FoodItemModel('Caprese salad', false,
-        randomColors[Random().nextInt(randomColors.length)]));
   }
 }
