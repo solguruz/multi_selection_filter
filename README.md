@@ -19,8 +19,6 @@
 <img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/assets/116786961/1d9d0dc8-bf73-4712-afad-0ae98b6b6be3"  width="45%">
 </p>
 
-  
-
 ## Installation
 
 Add the `multi_selection_filter` dependency to your `pubspec.yaml` file:
