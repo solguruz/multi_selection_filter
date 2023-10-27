@@ -9,3 +9,11 @@
 ## 0.0.3
 
 * [Fix] Github URL for poster not work on pub.dev
+
+## 0.0.4
+
+* [Feature] Making example code simple
+* [Feature] Updating README file
+* [Feature] Adding a documentation
+* [Refactor] Code refactoring
+
