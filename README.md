@@ -6,11 +6,11 @@
 
 ##  Features
 
- -   Compatibility with Flutter 3.13
- -   Checkbox list for easy item selection
- -   Comprehensive customization options
- -   Built-in search functionality for quick item retrieval within the dialog
- -   Option to display removable chips for added user convenience
+-   Compatibility with Flutter 3.13
+-   Checkbox list for easy item selection
+-   Comprehensive customization options
+-   Built-in search functionality for quick item retrieval within the dialog
+-   Option to display removable chips for added user convenience
 
 </br>
 <p align="center">
@@ -31,7 +31,7 @@ dependencies:
 
 ## Usage
 
- 1. Create a Map with items and their initial selection status:
+1. Create a Map with items and their initial selection status:
 
 ```dart
  Map<String, bool> foodItems = {};
@@ -103,6 +103,20 @@ dependencies:
 ## 🚀 About Us
 
 Engineering Quality Solutions by employing technologies with Passion and Love | Web and Mobile App Development Company in India and Canada.
+
+## 🔗 Links
+
+<div align="left">
+
+<a href="https://solguruz.com/hire-flutter-developers/" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/assets/hire_flutter_developer.png" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://solguruz.com/services/flutter-app-development" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/assets/explore_our_flutter_service.png" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+</div>
 
 ## License
 
