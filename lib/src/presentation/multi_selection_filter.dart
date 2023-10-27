@@ -108,19 +108,10 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
     searchTextController.dispose();
   }
 
-  /// check if item list length and checkbox length are equal,
-  /// otherwise error will be thrown
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => widget.selectedList.length != widget.textListToShow.length
-          ? ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(
-                    'Item selected list must be same length as Title list'),
-              ),
-            )
-          : buildMultiSelectionDialog(),
+      onTap: () => buildMultiSelectionDialog(),
       child: widget.child,
     );
   }
@@ -221,6 +212,10 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
 
   /// Creates a list for all items
   void createListAllElements() {
+    /// Checks list items has corresponding bool items
+    /// for particular item is either selected or unselected
+    assert(widget.selectedList.length == widget.textListToShow.length);
+
     itemModels = [];
     for (var i = 0; i < widget.textListToShow.length; i++) {
       itemModels.add(ItemModel(
