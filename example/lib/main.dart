@@ -75,14 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: "Select Food",
         textListToShow: foodItems.keys.toList(),
         selectedList: foodItems.values.toList(),
-        okButtonText: "Ok",
         accentColor: const Color(0xFF01b4e4),
         checkboxTitleBG: Colors.black87,
         checkboxCheckColor: Colors.white,
         checkboxTitleTextColor: Colors.white,
         doneButtonBG: const Color(0xFF01b4e4),
         doneButtonTextColor: Colors.white,
-        onOkPress: () => Navigator.pop(context),
         onCheckboxTap: (key, index, isChecked) {
           setState(() {
             foodItems[key] = isChecked;

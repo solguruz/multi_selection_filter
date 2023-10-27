@@ -16,7 +16,6 @@ class MultiSelectionFilter extends StatefulWidget {
     required this.title,
     required this.textListToShow,
     required this.selectedList,
-    required this.onOkPress,
     required this.onCheckboxTap,
     required this.child,
     required this.accentColor,
@@ -29,7 +28,6 @@ class MultiSelectionFilter extends StatefulWidget {
     this.onDoneButtonPressed,
     this.closeIconBG = Colors.black,
     this.closeIconColor = Colors.white,
-    this.okButtonText = AppConstants.ok,
     this.doneButtonText = AppConstants.done,
     this.searchHint = AppConstants.searchHint,
   });
@@ -46,12 +44,8 @@ class MultiSelectionFilter extends StatefulWidget {
   /// Hint for search TextField
   final String searchHint;
 
-  final String okButtonText;
-
   /// Creates a widget which will show this dialog box upon clicked.
   final Widget child;
-
-  final Function onOkPress;
 
   /// Title for done button in dialog
   final String doneButtonText;
