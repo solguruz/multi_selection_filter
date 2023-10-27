@@ -90,6 +90,24 @@ class MultiSelectionFilter extends StatefulWidget {
 }
 
 class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
+  /// Search TextField text controller
+  TextEditingController searchTextController = TextEditingController();
+
+  /// Whether to show list items from search
+  bool showingFromSearch = false;
+
+  /// List of all items
+  List<ItemModel> itemModels = [];
+
+  /// List of searched items
+  List<ItemModel> searchedItemModels = [];
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchTextController.dispose();
+  }
+
   /// check if item list length and checkbox length are equal,
   /// otherwise error will be thrown
   @override
@@ -109,39 +127,6 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
 
   /// Creates the Multi selection filter dialog
   buildMultiSelectionDialog() {
-    TextEditingController searchTextController = TextEditingController();
-    bool showingFromSearch = false;
-    List<ItemModel> itemModels = [];
-    List<ItemModel> searchedItemModels = [];
-    void createListAllElements() {
-      itemModels = [];
-      for (var i = 0; i < widget.textListToShow.length; i++) {
-        itemModels.add(ItemModel(
-            i, widget.textListToShow[i], widget.selectedList[i] ?? false));
-      }
-    }
-
-    /// Perform a search on dialog list
-    void createListSearchedValue(String value) {
-      searchedItemModels = [];
-      for (var i = 0; i < widget.textListToShow.length; i++) {
-        if (widget.textListToShow[i]
-            .toLowerCase()
-            .contains(value.toLowerCase())) {
-          searchedItemModels.add(itemModels[i]);
-        }
-      }
-    }
-
-    /// Updates list when item is selected or unselected
-    /// and also sends a callback for the same
-    void onItemSelected(int id, bool isSelected) {
-      int index = itemModels.indexWhere((model) => model.id == id);
-      itemModels[index].isSelected = !itemModels[index].isSelected;
-      widget.onCheckboxTap(itemModels[index].itemName, index, isSelected);
-    }
-
-    /// Shows the main dialog
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -232,6 +217,35 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
         });
       },
     );
+  }
+
+  /// Creates a list for all items
+  void createListAllElements() {
+    itemModels = [];
+    for (var i = 0; i < widget.textListToShow.length; i++) {
+      itemModels.add(ItemModel(
+          i, widget.textListToShow[i], widget.selectedList[i] ?? false));
+    }
+  }
+
+  /// Perform a search on dialog list
+  void createListSearchedValue(String value) {
+    searchedItemModels = [];
+    for (var i = 0; i < widget.textListToShow.length; i++) {
+      if (widget.textListToShow[i]
+          .toLowerCase()
+          .contains(value.toLowerCase())) {
+        searchedItemModels.add(itemModels[i]);
+      }
+    }
+  }
+
+  /// Updates list when item is selected or unselected
+  /// and also sends a callback for the same
+  void onItemSelected(int id, bool isSelected) {
+    int index = itemModels.indexWhere((model) => model.id == id);
+    itemModels[index].isSelected = !itemModels[index].isSelected;
+    widget.onCheckboxTap(itemModels[index].itemName, index, isSelected);
   }
 
   /// Creates the search bar
