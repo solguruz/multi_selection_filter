@@ -18,6 +18,7 @@ Widget verticalSpace(BuildContext context, double verticalSpace) {
   );
 }
 
+/// Creates a chip widget from item which are selected
 Widget buildSelectedListChip({
   required BuildContext context,
   required Color chipBackgroundColor,
@@ -62,6 +63,7 @@ Widget buildSelectedListChip({
   );
 }
 
+/// Creates a custom materia button
 Widget customMaterialButton({
   required context,
   required Color backgroundColor,
@@ -91,6 +93,7 @@ Widget customMaterialButton({
   );
 }
 
+/// Creates a rounded close icon button
 Widget buildRoundCloseButton(
     {required Color iconColor,
     required Color iconBackgroundColor,
@@ -116,6 +119,7 @@ Widget buildRoundCloseButton(
   );
 }
 
+/// Creates checkbox with title
 Widget buildCheckboxWithTitle({
   required BuildContext context,
   required String title,

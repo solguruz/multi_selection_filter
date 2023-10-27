@@ -34,26 +34,54 @@ class MultiSelectionFilter extends StatefulWidget {
     this.searchHint = AppConstants.searchHint,
   });
 
-  ///  Need to pass list of bool and text. For each items,
-  /// it will show weather it is checked or not.
-  /// And sam will be updated when filter applied.
+  /// List of String for dialog item titles
   final List<String> textListToShow;
+
+  /// List of bool for whether current item is selected or not
   final List<bool?> selectedList;
+
+  /// Dialog box title
   final String title;
+
+  /// Hint for search TextField
   final String searchHint;
+
   final String okButtonText;
+
+  /// Creates a widget which will show this dialog box upon clicked.
   final Widget child;
+
   final Function onOkPress;
+
+  /// Title for done button in dialog
   final String doneButtonText;
+
+  /// Whether to show a chips of selected items
   final bool showChips;
-  final Color closeIconBG,
-      closeIconColor,
-      accentColor,
-      checkboxTitleBG,
-      checkboxCheckColor,
-      checkboxTitleTextColor,
-      doneButtonBG,
-      doneButtonTextColor;
+
+  ///Background color for close icon
+  final Color closeIconBG;
+
+  /// Tint color for close icon
+  final Color closeIconColor;
+
+  /// Accent color for dialog box UI
+  final Color accentColor;
+
+  /// Background color for checkbox title
+  final Color checkboxTitleBG;
+
+  /// Tint color for checkbox check icon
+  final Color checkboxCheckColor;
+
+  /// Text color for checkbox title
+  final Color checkboxTitleTextColor;
+
+  /// Background color for done button
+  final Color doneButtonBG;
+
+  /// Text color for done button
+  final Color doneButtonTextColor;
 
   /// Get callback when filter applied
   final Function(
@@ -68,10 +96,10 @@ class MultiSelectionFilter extends StatefulWidget {
 }
 
 class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
+  /// check if item list length and checkbox length are equal,
+  /// otherwise error will be thrown
   @override
   Widget build(BuildContext context) {
-    /// check if item list length and checkbox length are equal,
-    /// otherwise error will be thrown
     return GestureDetector(
       onTap: () => widget.selectedList.length != widget.textListToShow.length
           ? ScaffoldMessenger.of(context).showSnackBar(
@@ -85,6 +113,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
     );
   }
 
+  /// Creates the Multi selection filter dialog
   buildMultiSelectionDialog() {
     TextEditingController searchTextController = TextEditingController();
     bool showingFromSearch = false;
@@ -118,7 +147,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
       widget.onCheckboxTap(itemModels[index].itemName, index, isSelected);
     }
 
-    /// Showing main dialog
+    /// Shows the main dialog
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -211,6 +240,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
     );
   }
 
+  /// Creates the search bar
   TextField buildDialogTopSearch(TextEditingController searchTextController,
       BuildContext context, void Function(String value) onSearched) {
     return TextField(
@@ -232,6 +262,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
     );
   }
 
+  /// Creates a list of dialog items
   Widget buildDialogList(
       bool showingFromSearch,
       List<ItemModel> searchedItemModels,
@@ -270,6 +301,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
     );
   }
 
+  /// Creates a chips of selected items inside dialog box
   Widget buildDialogChips(
       BuildContext context,
       List<ItemModel> itemModels,
