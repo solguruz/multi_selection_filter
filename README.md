@@ -106,12 +106,40 @@ Engineering Quality Solutions by employing technologies with Passion and Love | 
 
 <div align="left">
 
+<a href="https://solguruz.com/" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/solguruz.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://www.facebook.com/SolGuruzHQ" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/facebook.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://www.linkedin.com/company/solguruz/" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/linkedin.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://www.instagram.com/solguruz/" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/instagram.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://twitter.com/SolGuruz" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/twitter.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://www.behance.net/solguruz" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/behance.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://dribbble.com/SolGuruz" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/dribbble.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
 <a href="https://solguruz.com/hire-flutter-developers/" target="_blank">
-    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/assets/hire_flutter_developer.png" alt=solguruz style="margin-bottom: 5px;" />
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/hire_flutter_developer.svg" alt=solguruz style="margin-bottom: 5px;" />
 </a>
 
 <a href="https://solguruz.com/services/flutter-app-development" target="_blank">
-    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/assets/explore_our_flutter_service.png" alt=solguruz style="margin-bottom: 5px;" />
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/explore_our_flutter_service.svg" alt=solguruz style="margin-bottom: 5px;" />
 </a>
 
 </div>
