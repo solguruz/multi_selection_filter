@@ -1,6 +1,6 @@
 # Multi Selection Filter for Flutter
 
-![Multi_selection_filter package poster](https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/assets/select_multi_filter_main.png)
+![Multi_selection_filter package poster](https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/select_multi_filter_main.png)
 
 **Multi Selection Filter** is a versatile Flutter package that allows you to present a list of items within a dialog box, giving users the ability to select or unselect items for various purposes. This dialog box is highly customizable to suit your needs.
 
@@ -14,9 +14,9 @@
 
 </br>
 <p align="center">
-<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/assets/multi_select_filter_1.png" width="45%">
+<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/multi_select_filter_1.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/assets/multi_select_filter_2.png"  width="45%">
+<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/multi_select_filter_2.png"  width="45%">
 </p>
 
 ## Installation
