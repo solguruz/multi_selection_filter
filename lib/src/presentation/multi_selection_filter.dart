@@ -16,7 +16,6 @@ class MultiSelectionFilter extends StatefulWidget {
     required this.title,
     required this.textListToShow,
     required this.selectedList,
-    required this.onOkPress,
     required this.onCheckboxTap,
     required this.child,
     required this.accentColor,
@@ -29,31 +28,54 @@ class MultiSelectionFilter extends StatefulWidget {
     this.onDoneButtonPressed,
     this.closeIconBG = Colors.black,
     this.closeIconColor = Colors.white,
-    this.okButtonText = AppConstants.ok,
     this.doneButtonText = AppConstants.done,
     this.searchHint = AppConstants.searchHint,
   });
 
-  ///  Need to pass list of bool and text. For each items,
-  /// it will show weather it is checked or not.
-  /// And sam will be updated when filter applied.
+  /// List of String for dialog item titles
   final List<String> textListToShow;
+
+  /// List of bool for whether current item is selected or not
   final List<bool?> selectedList;
+
+  /// Dialog box title
   final String title;
+
+  /// Hint for search TextField
   final String searchHint;
-  final String okButtonText;
+
+  /// Creates a widget which will show this dialog box upon clicked.
   final Widget child;
-  final Function onOkPress;
+
+  /// Title for done button in dialog
   final String doneButtonText;
+
+  /// Whether to show a chips of selected items
   final bool showChips;
-  final Color closeIconBG,
-      closeIconColor,
-      accentColor,
-      checkboxTitleBG,
-      checkboxCheckColor,
-      checkboxTitleTextColor,
-      doneButtonBG,
-      doneButtonTextColor;
+
+  ///Background color for close icon
+  final Color closeIconBG;
+
+  /// Tint color for close icon
+  final Color closeIconColor;
+
+  /// Accent color for dialog box UI
+  final Color accentColor;
+
+  /// Background color for checkbox title
+  final Color checkboxTitleBG;
+
+  /// Tint color for checkbox check icon
+  final Color checkboxCheckColor;
+
+  /// Text color for checkbox title
+  final Color checkboxTitleTextColor;
+
+  /// Background color for done button
+  final Color doneButtonBG;
+
+  /// Text color for done button
+  final Color doneButtonTextColor;
 
   /// Get callback when filter applied
   final Function(
@@ -68,57 +90,34 @@ class MultiSelectionFilter extends StatefulWidget {
 }
 
 class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
+  /// Search TextField text controller
+  TextEditingController searchTextController = TextEditingController();
+
+  /// Whether to show list items from search
+  bool showingFromSearch = false;
+
+  /// List of all items
+  List<ItemModel> itemModels = [];
+
+  /// List of searched items
+  List<ItemModel> searchedItemModels = [];
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchTextController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    /// check if item list length and checkbox length are equal,
-    /// otherwise error will be thrown
     return GestureDetector(
-      onTap: () => widget.selectedList.length != widget.textListToShow.length
-          ? ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(
-                    'Item selected list must be same length as Title list'),
-              ),
-            )
-          : buildMultiSelectionDialog(),
+      onTap: () => buildMultiSelectionDialog(),
       child: widget.child,
     );
   }
 
+  /// Creates the Multi selection filter dialog
   buildMultiSelectionDialog() {
-    TextEditingController searchTextController = TextEditingController();
-    bool showingFromSearch = false;
-    List<ItemModel> itemModels = [];
-    List<ItemModel> searchedItemModels = [];
-    void createListAllElements() {
-      itemModels = [];
-      for (var i = 0; i < widget.textListToShow.length; i++) {
-        itemModels.add(ItemModel(
-            i, widget.textListToShow[i], widget.selectedList[i] ?? false));
-      }
-    }
-
-    /// Perform a search on dialog list
-    void createListSearchedValue(String value) {
-      searchedItemModels = [];
-      for (var i = 0; i < widget.textListToShow.length; i++) {
-        if (widget.textListToShow[i]
-            .toLowerCase()
-            .contains(value.toLowerCase())) {
-          searchedItemModels.add(itemModels[i]);
-        }
-      }
-    }
-
-    /// Updates list when item is selected or unselected
-    /// and also sends a callback for the same
-    void onItemSelected(int id, bool isSelected) {
-      int index = itemModels.indexWhere((model) => model.id == id);
-      itemModels[index].isSelected = !itemModels[index].isSelected;
-      widget.onCheckboxTap(itemModels[index].itemName, index, isSelected);
-    }
-
-    /// Showing main dialog
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -211,6 +210,40 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
     );
   }
 
+  /// Creates a list for all items
+  void createListAllElements() {
+    /// Checks list items has corresponding bool items
+    /// for particular item is either selected or unselected
+    assert(widget.selectedList.length == widget.textListToShow.length);
+
+    itemModels = [];
+    for (var i = 0; i < widget.textListToShow.length; i++) {
+      itemModels.add(ItemModel(
+          i, widget.textListToShow[i], widget.selectedList[i] ?? false));
+    }
+  }
+
+  /// Perform a search on dialog list
+  void createListSearchedValue(String value) {
+    searchedItemModels = [];
+    for (var i = 0; i < widget.textListToShow.length; i++) {
+      if (widget.textListToShow[i]
+          .toLowerCase()
+          .contains(value.toLowerCase())) {
+        searchedItemModels.add(itemModels[i]);
+      }
+    }
+  }
+
+  /// Updates list when item is selected or unselected
+  /// and also sends a callback for the same
+  void onItemSelected(int id, bool isSelected) {
+    int index = itemModels.indexWhere((model) => model.id == id);
+    itemModels[index].isSelected = !itemModels[index].isSelected;
+    widget.onCheckboxTap(itemModels[index].itemName, index, isSelected);
+  }
+
+  /// Creates the search bar
   TextField buildDialogTopSearch(TextEditingController searchTextController,
       BuildContext context, void Function(String value) onSearched) {
     return TextField(
@@ -232,6 +265,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
     );
   }
 
+  /// Creates a list of dialog items
   Widget buildDialogList(
       bool showingFromSearch,
       List<ItemModel> searchedItemModels,
@@ -270,6 +304,7 @@ class _MultiSelectionFilterState extends State<MultiSelectionFilter> {
     );
   }
 
+  /// Creates a chips of selected items inside dialog box
   Widget buildDialogChips(
       BuildContext context,
       List<ItemModel> itemModels,

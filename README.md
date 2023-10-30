@@ -1,22 +1,22 @@
 # Multi Selection Filter for Flutter
 
-![Multi_selection_filter package poster](https://github-production-user-asset-6210df.s3.amazonaws.com/116786961/277310593-ce9f8f58-c264-4097-b1ea-f43144bac29c.png "Multi_selection_filter")
+![Multi_selection_filter package poster](https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/select_multi_filter_main.png)
 
 **Multi Selection Filter** is a versatile Flutter package that allows you to present a list of items within a dialog box, giving users the ability to select or unselect items for various purposes. This dialog box is highly customizable to suit your needs.
 
 ##  Features
 
- -   Compatibility with Flutter 3.13
- -   Checkbox list for easy item selection
- -   Comprehensive customization options
- -   Built-in search functionality for quick item retrieval within the dialog
- -   Option to display removable chips for added user convenience
+-   Compatibility with Flutter 3.13
+-   Checkbox list for easy item selection
+-   Comprehensive customization options
+-   Built-in search functionality for quick item retrieval within the dialog
+-   Option to display removable chips for added user convenience
 
 </br>
 <p align="center">
-<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/assets/116786961/37aca9f0-ff6c-4f05-b033-759eda7a0733" width="45%">
+<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/multi_select_filter_1.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/assets/116786961/1d9d0dc8-bf73-4712-afad-0ae98b6b6be3"  width="45%">
+<img alt="Screenshot" src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/multi_select_filter_2.png"  width="45%">
 </p>
 
 ## Installation
@@ -31,7 +31,7 @@ dependencies:
 
 ## Usage
 
- 1. Create a Map with items and their initial selection status:
+1. Create a Map with items and their initial selection status:
 
 ```dart
  Map<String, bool> foodItems = {};
@@ -54,14 +54,12 @@ dependencies:
         title: "Select your favorite Food",
         textListToShow: foodItems.keys.toList(),
         selectedList: foodItems.values.toList(),
-        okButtonText: "Ok",
         accentColor: const Color(0xFF01b4e4),
         checkboxTitleBG: Colors.black87,
         checkboxCheckColor: Colors.white,
         checkboxTitleTextColor: Colors.white,
         doneButtonBG: const Color(0xFF01b4e4),
         doneButtonTextColor: Colors.white,
-        onOkPress: () => Navigator.pop(context),
         onCheckboxTap: (key, index, isChecked) {
           setState(() {
             foodItems[key] = isChecked;
@@ -98,4 +96,76 @@ dependencies:
           ),
         ),
       ),
+```
+
+## 🚀 About Us
+
+Engineering Quality Solutions by employing technologies with Passion and Love | Web and Mobile App Development Company in India and Canada.
+
+## 🔗 Links
+
+<div align="left">
+
+<a href="https://solguruz.com/" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/solguruz.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://www.facebook.com/SolGuruzHQ" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/facebook.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://www.linkedin.com/company/solguruz/" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/linkedin.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://www.instagram.com/solguruz/" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/instagram.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://twitter.com/SolGuruz" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/twitter.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://www.behance.net/solguruz" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/behance.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://dribbble.com/SolGuruz" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/dribbble.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://solguruz.com/hire-flutter-developers/" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/hire_flutter_developer.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+<a href="https://solguruz.com/services/flutter-app-development" target="_blank">
+    <img src="https://github.com/solguruz/multi_selection_filter/blob/feat/modify_readme_file/.github/explore_our_flutter_service.svg" alt=solguruz style="margin-bottom: 5px;" />
+</a>
+
+</div>
+
+## License
+
+```text
+MIT License
+
+Copyright (c) 2023 SolGuruz LLP
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```

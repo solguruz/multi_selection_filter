@@ -17,3 +17,9 @@
 * [Feature] Adding a documentation
 * [Refactor] Code refactoring
 
+## 0.0.5
+
+* [Doc] Added more dart documentation comments
+* [Feature] Improved error handling
+* [Feature] Updated README file
+* [Refactor] Code refactoring
