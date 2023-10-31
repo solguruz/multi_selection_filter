@@ -23,3 +23,7 @@
 * [Feature] Improved error handling
 * [Feature] Updated README file
 * [Refactor] Code refactoring
+
+## 0.0.6
+
+* [Fix] Update links of readme file
